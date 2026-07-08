@@ -26,6 +26,8 @@
          - Entity Details -> Goal: Inform -> Presentation: Dynamic HTML Cards -> Interaction: Updates based on tree selection -> Justification: Keeps the UI clean by only showing detailed UML text when requested.
          Library/Method: Chart.js for data visualization, Vanilla JS for state/DOM manipulation, Tailwind for layout. NO SVG or Mermaid used. -->
          
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
     <nav class="bg-slate-900 text-white shadow-lg sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
@@ -50,14 +52,14 @@
             <div class="mb-8">
                 <h1 class="text-3xl font-extrabold text-slate-900 mb-2">System Architecture Overview</h1>
                 <p class="text-lg text-slate-600 leading-relaxed">
-                    This dashboard provides a quantitative analysis of the Pharmacy / Healthcare Management System's underlying object-oriented architecture. The system comprises 22 distinct entities, heavily utilizing inheritance and aggregation to model real-world healthcare operations. Use the charts below to understand the distribution of architectural complexity.
+                    This dashboard provides a quantitative analysis of the Pharmacy / Healthcare Management System's underlying object-oriented architecture. The system comprises 23 distinct entities, heavily utilizing inheritance and aggregation to model real-world healthcare operations. Use the charts below to understand the distribution of architectural complexity.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
                     <h2 class="text-xl font-bold mb-4 text-slate-800 border-b pb-2">Class Distribution by Domain</h2>
-                    <p class="text-sm text-slate-500 mb-4">Breakdown of the 22 system classes categorized by their primary business function within the pharmacy.</p>
+                    <p class="text-sm text-slate-500 mb-4">Breakdown of the 23 system classes categorized by their primary business function within the pharmacy.</p>
                     <style>
                         .chart-container-doughnut { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: 350px; max-height: 400px; }
                     </style>
@@ -81,7 +83,7 @@
             <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
                 <div class="bg-teal-600 text-white p-6 rounded-xl shadow-sm flex flex-col items-center justify-center text-center">
                     <span class="text-4xl mb-2">📦</span>
-                    <span class="text-3xl font-black">22</span>
+                    <span class="text-3xl font-black">23</span>
                     <span class="text-teal-100 text-sm uppercase tracking-wider font-semibold mt-1">Total Classes</span>
                 </div>
                 <div class="bg-slate-800 text-white p-6 rounded-xl shadow-sm flex flex-col items-center justify-center text-center">
@@ -414,10 +416,31 @@
                 methods: ["+ addReceipt(payment: Payment): void", "+ displayReceipt(): void"],
                 children: []
             }
+            "Report": {
+                type: "Class",
+                icon: "📊",
+                desc: "Aggregates Receipt details to generate sales and shift reports.",
+                attributes: [
+                    "- receiptDetails: Receipt", 
+                    "- reportGenerateDateTime: Date", 
+                    "~ input: Scanner"
+                ],
+                methods: [
+                    "+ getReceiptDetails(): Receipt", 
+                    "+ getReportGenerateDateTime(): Date", 
+                    "+ setReceiptDetails(receiptDetails: Receipt): void", 
+                    "+ setReportGenerateDateTime(reportGenerateDateTime: Date): void", 
+                    "+ adminMenuReport(): void", 
+                    "+ displaySalesReport(): void", 
+                    "+ displayShiftReport(): void"
+                ],
+                children: []
+            }
+
         };
 
-        const hierarchyRoots = ["Person", "Medicine", "Equipment", "Payment", "Order", "Item", "Receipt", "Address", "Promotion"];
-
+        const hierarchyRoots = ["Person", "Medicine", "Equipment", "Payment", "Order", "Item", "Receipt", "Address", "Promotion", "Report"];
+       
         function navigate(viewId) {
             document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.nav-btn').forEach(el => {
